@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 return [
 
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Lisbon',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'pt_PT'),
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 

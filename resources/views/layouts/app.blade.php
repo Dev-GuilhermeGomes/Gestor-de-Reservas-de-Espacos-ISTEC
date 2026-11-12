@@ -22,7 +22,9 @@
             @if($gere)
                 <span class="grupo">Gestor de Espaços</span>
                 <a href="/gestor" class="{{ request()->is('gestor') ? 'ativo' : '' }}">Pedidos</a>
-                <span class="breve">Indisponibilidades</span>
+                <a href="/gestor/ocupacao" class="{{ request()->is('gestor/ocupacao') ? 'ativo' : '' }}">Ocupação global</a>
+                <a href="/gestor/indisponibilidades" class="{{ request()->is('gestor/indisponibilidades') ? 'ativo' : '' }}">Indisponibilidades</a>
+                <a href="/gestor/salas" class="{{ request()->is('gestor/salas') ? 'ativo' : '' }}">Salas</a>
                 <span class="breve">Regras de utilização</span>
             @endif
 
@@ -44,6 +46,10 @@
             <span class="etiqueta">{{ $nomes[$u->perfil] ?? $u->perfil }}</span>
         </header>
         <main>@yield('conteudo')</main>
+        <footer class="rodape">
+            <span>ISTEC · Gestor de Reservas de Espaços</span>
+            <span>© {{ now()->year }}</span>
+        </footer>
     </div>
 </body>
 </html>

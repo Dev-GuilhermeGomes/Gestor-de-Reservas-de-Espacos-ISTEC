@@ -8,13 +8,26 @@ class User extends Authenticatable
 {
     protected $table = 'utilizadores';
 
-    protected $fillable = ['nome', 'email', 'password', 'perfil', 'ativo'];
+    protected $fillable = [
+        'nome',
+        'email',
+        'password',
+        'perfil',
+        'ativo',
+        'two_factor_secret',
+        'two_factor_confirmed_at',
+    ];
 
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'two_factor_secret'];
 
     protected function casts(): array
     {
-        return ['password' => 'hashed', 'ativo' => 'boolean'];
+        return [
+            'password' => 'hashed',
+            'ativo' => 'boolean',
+            'two_factor_secret' => 'encrypted',
+            'two_factor_confirmed_at' => 'datetime',
+        ];
     }
 
     // a tabela não tem remember_token
