@@ -17,7 +17,7 @@
         <nav>
             <a href="/painel" class="{{ request()->is('painel') ? 'ativo' : '' }}">Início</a>
             <span class="breve">Reservar espaço</span>
-            <span class="breve">As minhas reservas</span>
+            <a href="/reservas" class="{{ request()->is('reservas') ? 'ativo' : '' }}">As minhas reservas</a>
 
             @if($gere)
                 <span class="grupo">Gestor de Espaços</span>

@@ -22,4 +22,9 @@ class User extends Authenticatable
     {
         return '';
     }
+
+    public function reservas()
+    {
+        return $this->hasMany(Reserva::class, 'utilizador_id');
+    }
 }
