@@ -3,7 +3,7 @@
 @section('titulo', 'As minhas reservas')
 
 @section('conteudo')
-    <p>DEBUG sucesso: {{ session('sucesso') ?? 'vazio' }} | erro: {{ session('erro') ?? 'vazio' }}</p>
+
     
     @if (session('sucesso'))
     <div class="alerta alerta-cancelado" role="status">
@@ -55,7 +55,7 @@
                             </td>
                             <td>
                                 <div class="acoes-reserva">
-                                    <button class="btn btn-reserva" type="button">Alterar</button>
+                                    <a class="btn btn-reserva" href="{{ route('alterarReserva', $reserva->id) }}">Alterar</a>
                                     <form action="{{ route('cancelarReserva', $reserva->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')

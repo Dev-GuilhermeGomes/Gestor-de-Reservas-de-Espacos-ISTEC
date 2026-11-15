@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Espaco;
 
 class UtilizadorController extends Controller
 {
@@ -48,35 +49,18 @@ class UtilizadorController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function alterar(string $id)
+    public function alterarReserva(string $id)
     {
         // ver a reserva se for do user
         $reserva = auth()->user()->reservas()->findOrFail($id);
 
+        $espacos = Espaco::where('ativo', true)->get(); // so salas que podem ser reservadas
 
-        //quando vai ser possivel cancelar/alterar
-        if ($reserva->estado=="CONCLUIDA" || $reserva->estado=="RECUSADA") 
-        {
-            return back()->with('erro', 'Não é possível alterar uma reserva que esteja concluída ou recusada.');
-        }
-        
-        if ($reserva->data_inicio -> isPast()){
-            return back()->with('erro', 'Não é possível alterar uma reserva que já começou.');
-        }
-        $reserva->update(['data_fim' => $reserva->expira_em->addDays(7)]);
-        
-        return back()->with('sucesso', 'Reserva alterada.');
+        return view('utilizadores.alterarReserva', compact('reserva', 'espacos'));
     }
 
     public function cancelarReserva(string $id)

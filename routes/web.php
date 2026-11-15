@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('perfil:UTILIZADOR,ADMINISTRADOR');//feito
     Route::delete('/reservas/cancelar/{id}', [UtilizadorController::class, 'cancelarReserva']) // DELETE?
         ->middleware('perfil:UTILIZADOR,ADMINISTRADOR')->name('cancelarReserva');//feito
-    Route::put('/reservas/alterar/{id}', [UtilizadorController::class, 'alterarReserva'])
-        ->middleware('perfil:UTILIZADOR,ADMINISTRADOR');
+    Route::get('/reservas/alterar/{id}', [UtilizadorController::class, 'alterarReserva'])
+        ->middleware('perfil:UTILIZADOR,ADMINISTRADOR')->name('alterarReserva');
 
 });

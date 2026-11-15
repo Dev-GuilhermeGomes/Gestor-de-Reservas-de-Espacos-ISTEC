@@ -65,4 +65,16 @@ td{padding:12px 10px;border-bottom:1px solid var(--borda)}
 .btn-cancelar{background:#fff;color:var(--texto);border:1px solid #8a8a8a}
 .btn-cancelar:hover{background:#f3f3f3}
 @media(max-width:600px){.reservas-cartao{padding:8px 12px 12px}.reservas-filtros{align-items:flex-start;flex-direction:column}.reservas-filtros .separadores{width:100%;overflow-x:auto}.reservas-periodo{width:100%}}
+.alterar-reserva-voltar{display:block;width:max-content;margin-bottom:16px;color:var(--texto);font-size:.9rem;text-decoration:none}
+.alterar-reserva-voltar:hover{text-decoration:underline}
+.alterar-reserva-cartao{width:100%;max-width:432px;padding:14px}
+.alterar-reserva-cartao h2{margin:0;font-size:1.05rem}
+.alterar-reserva-descricao{margin:4px 0 12px;color:#777;font-size:.85rem}
+.alterar-reserva-form label{margin-top:12px;font-size:.8rem;font-weight:500}
+.alterar-reserva-form input,.alterar-reserva-form select{width:100%;height:38px;margin-top:5px;padding:7px 8px;border:1px solid var(--borda);border-radius:4px;background:#fff;color:var(--texto);font:inherit;font-size:.85rem}
+.alterar-reserva-form input:focus,.alterar-reserva-form select:focus{outline:3px solid rgba(0,172,230,.25);border-color:var(--azul)}
+.alterar-reserva-aviso{margin:12px 0;border-bottom:1px solid #eee;padding-bottom:12px;color:#777;font-size:.8rem}
+.alterar-reserva-acoes{display:flex;gap:8px;align-items:center}
+.alterar-reserva-acoes .btn{padding:8px 14px;border-radius:3px;font-size:.85rem}
+.alterar-reserva-acoes .btn-cancelar{color:var(--texto)}
 @media(max-width:800px){.painel{flex-direction:column}.lateral{width:100%}}
