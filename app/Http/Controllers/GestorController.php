@@ -55,7 +55,7 @@ class GestorController extends Controller
             })
             ->count();
 
-        return view('gestor.pedidos', [
+        return $this->reactPage('manager.requests', [
             'pedidos' => $pedidosFiltrados,
             'estadoAtual' => $estado,
             'aprovadasSemana' => $aprovadasSemana,
@@ -73,7 +73,7 @@ class GestorController extends Controller
 
         $pedido->load(['espaco', 'utilizador']);
 
-        return view('gestor.recusar', ['pedido' => $pedido]);
+        return $this->reactPage('manager.reject', ['pedido' => $pedido]);
     }
 
     public function mostrarMotivo(Pedido $pedido): View
@@ -86,7 +86,7 @@ class GestorController extends Controller
 
         $pedido->load(['espaco', 'utilizador']);
 
-        return view('gestor.motivo', ['pedido' => $pedido]);
+        return $this->reactPage('manager.reason', ['pedido' => $pedido]);
     }
 
     public function editarPedido(Pedido $pedido): View
@@ -99,7 +99,7 @@ class GestorController extends Controller
 
         $pedido->load(['espaco', 'utilizador']);
 
-        return view('gestor.editar-pedido', [
+        return $this->reactPage('manager.edit-reservation', [
             'pedido' => $pedido,
             'espacos' => $this->espacosDoGestor(),
         ]);
@@ -219,7 +219,7 @@ class GestorController extends Controller
             ];
         });
 
-        return view('gestor.ocupacao', [
+        return $this->reactPage('manager.occupancy', [
             'espacos' => (clone $espacosVisiveis)->orderBy('edificio')->orderBy('nome')->get(),
             'tipos' => (clone $espacosVisiveis)->whereNotNull('tipo')->distinct()->orderBy('tipo')->pluck('tipo'),
             'ocupacao' => $ocupacao,
@@ -284,7 +284,7 @@ class GestorController extends Controller
             $indisponibilidades = $indisponibilidades->filter(fn (object $item): bool => $item->estado === $estado);
         }
 
-        return view('gestor.indisponibilidades', [
+        return $this->reactPage('manager.unavailabilities', [
             'indisponibilidades' => $indisponibilidades,
             'estadoAtual' => $estado,
             'contagens' => [
@@ -298,7 +298,7 @@ class GestorController extends Controller
 
     public function criarIndisponibilidade(): View
     {
-        return view('gestor.criar-indisponibilidade', [
+        return $this->reactPage('manager.create-unavailability', [
             'espacos' => $this->espacosDoGestor(),
             'estados' => $this->estadosIndisponibilidade(),
         ]);
@@ -350,7 +350,7 @@ class GestorController extends Controller
         $espaco = Espaco::query()->findOrFail($registo->espaco_id);
         $this->garantirAcessoAoEspaco($espaco);
 
-        return view('gestor.editar-indisponibilidade', [
+        return $this->reactPage('manager.edit-unavailability', [
             'indisponibilidade' => $registo,
             'espacos' => $this->espacosDoGestor(),
             'estados' => $this->estadosIndisponibilidade(),
@@ -392,12 +392,12 @@ class GestorController extends Controller
 
     public function salas(): View
     {
-        return view('gestor.salas', ['espacos' => $this->espacosDoGestor()->load('equipamentos')]);
+        return $this->reactPage('manager.rooms', ['espacos' => $this->espacosDoGestor()->load('equipamentos')]);
     }
 
     public function criarSalaForm(): View
     {
-        return view('gestor.criar-sala');
+        return $this->reactPage('manager.create-room');
     }
 
     public function criarSala(Request $request): RedirectResponse
@@ -425,7 +425,7 @@ class GestorController extends Controller
     {
         $this->garantirAcessoAoEspaco($espaco);
 
-        return view('gestor.editar-sala', ['espaco' => $espaco->load('equipamentos')]);
+        return $this->reactPage('manager.edit-room', ['espaco' => $espaco->load('equipamentos')]);
     }
 
     public function adicionarEquipamento(Request $request, Espaco $espaco): RedirectResponse
