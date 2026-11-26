@@ -24,10 +24,5 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::table('utilizadores', function (Blueprint $table) {
-            $table->dropColumn(['two_factor_secret', 'two_factor_confirmed_at']);
-        });
-    }
+    public function down(): void {}
 };
