@@ -20,7 +20,8 @@ Route::middleware('throttle:5,1')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'sair']);
-    Route::view('/painel', 'painel');
+    Route::view('/painel', 'app', ['page' => ['component' => 'dashboard', 'props' => []]]);
+    Route::view('/utilizador/reservar', 'app', ['page' => ['component' => 'user.reservation', 'props' => []]]);
     Route::get('/gestor', [GestorController::class, 'pedidos'])
         ->middleware('perfil:GESTOR_ESPACOS,ADMINISTRADOR');
     Route::get('/gestor/ocupacao', [GestorController::class, 'ocupacao'])
@@ -59,6 +60,6 @@ Route::middleware('auth')->group(function () {
         ->middleware('perfil:GESTOR_ESPACOS,ADMINISTRADOR');
     Route::post('/gestor/salas/{espaco}/equipamentos', [GestorController::class, 'adicionarEquipamento'])
         ->middleware('perfil:GESTOR_ESPACOS,ADMINISTRADOR');
-    Route::view('/admin', 'area', ['titulo' => 'Área da Administração'])
+    Route::view('/admin', 'app', ['page' => ['component' => 'admin', 'props' => []]])
         ->middleware('perfil:ADMINISTRADOR');
 });

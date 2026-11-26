@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,7 +17,7 @@ class AuthController extends Controller
 {
     public function mostrar(): View
     {
-        return view('auth.login');
+        return $this->reactPage('auth.login');
     }
 
     public function entrar(Request $request): RedirectResponse
@@ -56,8 +60,9 @@ class AuthController extends Controller
         }
 
         $uri = app(Google2FA::class)->getQRCodeUrl('Reservas ISTEC', $user->email, $secret);
+        $qrCode = (new Writer(new ImageRenderer(new RendererStyle(240), new SvgImageBackEnd)))->writeString($uri);
 
-        return view('auth.two-factor-setup', compact('secret', 'uri'));
+        return $this->reactPage('auth.two-factor-setup', compact('secret', 'qrCode'));
     }
 
     public function configurar(Request $request): RedirectResponse
@@ -88,7 +93,7 @@ class AuthController extends Controller
             return redirect('/login');
         }
 
-        return view('auth.two-factor-challenge');
+        return $this->reactPage('auth.two-factor-challenge');
     }
 
     public function verificar(Request $request): RedirectResponse
