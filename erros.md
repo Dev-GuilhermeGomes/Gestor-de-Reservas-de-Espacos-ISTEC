@@ -110,7 +110,7 @@ Motivo dos erros de base de dados: o PHP CLI não carregava pdo_sqlite.
 
 ```text
 php -d extension=php_sqlite3.dll -d extension=php_pdo_sqlite.dll vendor/bin/phpunit --no-progress --no-coverage
-22 testes: 8 passaram, 12 falharam e 2 deram erro.
+22 testes: 12 passaram, 10 falharam e 0 deram erro.
 Os erros de migração e as falhas funcionais estão detalhados acima.
 ```
 
